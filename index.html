@@ -3,17 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sarkari Exam Photo Tool</title>
     
+    <!-- 1. POWERFUL TITLE -->
+    <title>Sarkari Photo Tool 2026 | Resize Image to 20kb-50kb for SSC, UPSC, Railways & Banking</title>
+
+    <!-- 2. DETAILED DESCRIPTION -->
+    <meta name="description" content="Free Online Image Resizer for Govt Exams. Convert photo to 20kb, 50kb, 100kb instantly. Best for SSC CGL, CHSL, UPSC IAS, IBPS PO, SBI, RRB NTPC forms. Adjust width, height (3.5cm x 4.5cm) and signature size without losing quality. Mobile friendly tool.">
+
+    <!-- 3. KEYWORDS -->
+    <meta name="keywords" content="ssc photo resizer, image compressor to 20kb, photo resizer 50kb, upsc signature resize, govt exam photo tool, passport size photo maker online free, reduce image size in kb, ssc chsl photo date maker, ibps photo resizer, railway exam photo maker">
+
+    <!-- 4. SOCIAL MEDIA & WHATSAPP SHARING (Open Graph) -->
+    <meta property="og:title" content="Sarkari Photo Tool - Resize Photo for Any Exam in 1 Click">
+    <meta property="og:description" content="SSC, UPSC, Bank ke form bhar rahe ho? Photo ka size set nahi ho raha? Yahan 2 second me resize karo. Free & Fast.">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+    <meta property="og:url" content="https://sarkari-photo-tool.netlify.app/">
+    <meta property="og:type" content="website">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- 5. SCHEMA MARKUP -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Sarkari Photo Resizer Tool",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "description": "A free client-side tool to resize and compress images for Indian Government job applications like SSC, UPSC, and Railways."
+    }
+    </script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; -webkit-tap-highlight-color: transparent; }
         
-        /* PC View Enhancement: Center the app nicely on desktop */
+        /* PC View Enhancement (Restored from previous fix) */
         @media (min-width: 640px) {
             .app-container {
                 box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
@@ -26,15 +57,10 @@
             body { background-color: #e2e8f0; }
         }
 
-        /* Shiny Button Effect */
         .btn-shine { position: relative; overflow: hidden; }
-        .btn-shine::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-20deg); animation: shine 3s infinite;
-        }
+        .btn-shine::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%); transform: skewX(-20deg); animation: shine 3s infinite; }
         @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
-
+        
         /* Custom Scrollbar */
         .custom-scroll::-webkit-scrollbar { width: 4px; }
         .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
@@ -43,33 +69,27 @@
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col items-center">
 
-    <!-- Header (Sticky on Mobile, Standard on PC) -->
-    <header class="w-full bg-white shadow-sm border-b border-slate-200 sticky top-0 z-10 sm:hidden">
-        <div class="px-4 py-3 flex items-center gap-2">
-            <div class="bg-blue-600 text-white p-1.5 rounded-lg">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+    <!-- NEW SEO HEADER -->
+    <header class="w-full bg-slate-900 text-white shadow-md sticky top-0 z-20">
+        <div class="max-w-md mx-auto px-4 py-4">
+            <div class="flex items-center justify-between mb-1">
+                <div class="flex items-center gap-2">
+                    <!-- Simple Logo Icon -->
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    
+                    <!-- MAIN KEYWORD RICH HEADING -->
+                    <h1 class="font-bold text-xl tracking-wide">Sarkari<span class="text-blue-400">Photo</span>Tool</h1>
+                </div>
+                <span class="text-[10px] bg-blue-900 px-2 py-1 rounded border border-blue-700 text-blue-200">2026 Updated</span>
             </div>
-            <div>
-                <h1 class="font-bold text-lg leading-tight text-slate-800">Sarkari Resizer</h1>
-                <p class="text-[10px] text-slate-500 font-medium">Safe & Fast</p>
-            </div>
+            <!-- Sub-heading for SEO -->
+            <p class="text-xs text-slate-400">Free Resizer for SSC, UPSC, IBPS & Railway Forms</p>
         </div>
     </header>
 
-    <!-- Main Container (Restricts width on PC to look like an App) -->
-    <main class="app-container w-full max-w-lg bg-white flex flex-col p-5 sm:p-8 flex-grow">
+    <!-- Main Container (App Logic) -->
+    <main class="app-container w-full max-w-lg bg-white flex flex-col p-5 sm:p-8 mb-4">
         
-        <!-- PC Header (Visible only on Desktop) -->
-        <div class="hidden sm:flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-            <div class="bg-blue-600 text-white p-2 rounded-lg">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-            </div>
-            <div>
-                <h1 class="font-bold text-xl text-slate-800">Sarkari Resizer</h1>
-                <p class="text-xs text-slate-500">Official Exam Photo Maker</p>
-            </div>
-        </div>
-
         <!-- STEP 1: Select Exam -->
         <div class="mb-5">
             <label class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">Step 1: Choose Exam</label>
@@ -84,14 +104,11 @@
             </button>
         </div>
 
-        <!-- STEP 2: Smart Upload Box (Always Active) -->
+        <!-- STEP 2: Smart Upload Box -->
         <div class="mb-5">
             <label class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">Step 2: Upload Photo</label>
-            <!-- Note: Removed disabled state, added ID for click logic -->
             <div id="smartUploadBox" class="relative w-full h-40 bg-blue-50 border-2 border-dashed border-blue-300 rounded-xl flex flex-col items-center justify-center text-center cursor-pointer hover:bg-blue-100 transition-all">
-                <!-- File input is hidden, triggered by JS -->
                 <input type="file" id="fileInput" accept="image/*" class="hidden">
-                
                 <div class="bg-white p-3 rounded-full shadow-sm mb-2">
                     <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                 </div>
@@ -113,37 +130,46 @@
             </div>
             
             <div class="p-4 flex flex-col items-center justify-center bg-slate-50 min-h-[220px] relative">
-                <!-- Loader -->
                 <div id="spinner" class="absolute inset-0 z-10 bg-white/90 flex flex-col items-center justify-center hidden">
                     <div class="w-10 h-10 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin mb-3"></div>
                     <span class="text-xs font-bold text-slate-600 animate-pulse">Compressing Image...</span>
                 </div>
-
                 <img id="previewProcessed" class="max-h-52 object-contain shadow-md border border-slate-200 rounded" alt="Result">
-                
-                <!-- Action Buttons -->
                 <div class="mt-5 w-full grid grid-cols-1 gap-3">
                     <button id="btnHD" class="btn-shine w-full py-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-xl font-bold text-lg shadow-lg shadow-emerald-200 active:scale-95 transition-transform flex items-center justify-center gap-2 border-b-4 border-emerald-700">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                         Download HD Quality
                     </button>
-                    
                     <button id="btnNormal" class="w-full py-3 bg-white text-slate-500 rounded-xl font-medium border border-slate-200 text-sm hover:bg-slate-50 flex items-center justify-center gap-2">
                         Download Standard (Low Res)
                     </button>
                 </div>
             </div>
         </div>
-        
-        <div class="mt-auto text-center pt-6">
-            <p class="text-[10px] text-slate-400">© 2024 Sarkari Tools • Browser Based Processing</p>
-        </div>
     </main>
+
+    <!-- SEO CONTENT SECTION (Bottom of page) -->
+    <section class="max-w-md mx-auto px-4 pb-10 text-slate-600">
+        <h2 class="font-bold text-lg text-slate-800 mb-3">Why use Sarkari Photo Tool?</h2>
+        <div class="text-sm space-y-3">
+            <p>
+                <strong>1. SSC CGL & CHSL Photo Resizer:</strong> SSC forms require photos between 20KB to 50KB. Our tool automatically adjusts dimensions to 3.5cm x 4.5cm.
+            </p>
+            <p>
+                <strong>2. UPSC IAS Signature Resizer:</strong> UPSC demands specific pixel dimensions. Select "UPSC" from the list to get the perfect format instantly.
+            </p>
+            <p>
+                <strong>3. Safe & Secure:</strong> Unlike other websites, we do not upload your photos to any server. All processing happens inside your mobile/browser.
+            </p>
+            <p class="text-xs text-slate-400 mt-4">
+                Supported Exams: SSC GD, MTS, CPO, IBPS PO, SBI Clerk, RRB Group D, NTPC, GATE 2026, NEET UG, JEE Main, PAN Card, Aadhar Card update photo.
+            </p>
+        </div>
+    </section>
 
     <!-- FULL SCREEN EXAM SELECTOR MODAL -->
     <div id="examModal" class="fixed inset-0 z-50 bg-slate-900/60 hidden flex items-end sm:items-center justify-center backdrop-blur-sm transition-opacity">
         <div id="modalContent" class="bg-white w-full sm:w-[450px] sm:rounded-2xl rounded-t-2xl h-[85vh] sm:h-[650px] flex flex-col shadow-2xl transform transition-transform duration-300 translate-y-full">
-            
             <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-white rounded-t-2xl">
                 <div>
                     <h2 class="font-bold text-lg text-slate-800">Select Purpose</h2>
@@ -153,17 +179,14 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-
-            <div id="examListContainer" class="flex-grow overflow-y-auto custom-scroll p-2 bg-slate-50">
-                <!-- List Generated by JS -->
-            </div>
+            <div id="examListContainer" class="flex-grow overflow-y-auto custom-scroll p-2 bg-slate-50"></div>
         </div>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // --- CONFIG ---
-        const monetagUrl = "https://google.com"; // Apka Link
+        const monetagUrl = "https://google.com"; // Replace with your Ad link
 
         // --- PRESETS ---
         const presets = [
@@ -269,14 +292,12 @@
 
         // --- 3. SELECTION LOGIC ---
         function selectExam(exam, btn) {
-            // Visuals
             document.querySelectorAll('.check-dot').forEach(d => d.classList.add('hidden'));
             document.querySelectorAll('.check-circle').forEach(c => c.classList.remove('border-blue-600'));
             
             btn.querySelector('.check-dot').classList.remove('hidden');
             btn.querySelector('.check-circle').classList.add('border-blue-600');
 
-            // Data
             inputW.value = exam.w;
             inputH.value = exam.h;
             inputKB.value = exam.kb;
@@ -288,21 +309,14 @@
             isExamSelected = true;
             setTimeout(closeModal, 200);
 
-            // If file was already picked (rare case), re-process
             if(currentFile) processImage(currentFile);
         }
 
-        // --- 4. SMART UPLOAD LOGIC (FIXED) ---
+        // --- 4. SMART UPLOAD LOGIC ---
         smartUploadBox.addEventListener('click', () => {
             if(!isExamSelected) {
-                // Agar exam select nahi hai, Modal kholo
-                // Optional: Alert dikha sakte ho, but direct open better hai UX ke liye
                 openModal();
-                
-                // Ek chhota toast/animation dikha sakte hain ki "Select Exam First"
-                // For now, modal header text acts as cue.
             } else {
-                // Agar select hai, File Manager kholo
                 fileInput.click();
             }
         });
@@ -325,7 +339,7 @@
             spinner.classList.remove('hidden');
             previewImg.style.opacity = '0.5';
 
-            await new Promise(r => setTimeout(r, 100)); // UI refresh
+            await new Promise(r => setTimeout(r, 100));
 
             const reader = new FileReader();
             reader.readAsDataURL(file);
@@ -342,7 +356,6 @@
                     canvas.height = h;
                     const ctx = canvas.getContext('2d');
                     
-                    // White background for transparent PNGs
                     ctx.fillStyle = "#FFFFFF";
                     ctx.fillRect(0,0,w,h);
                     ctx.drawImage(img, 0, 0, w, h);
@@ -396,7 +409,6 @@
                 dl(document.getElementById('previewProcessed').dataset.dl, 'HD_Quality');
             }, 800);
         };
-
     </script>
 </body>
 </html>
