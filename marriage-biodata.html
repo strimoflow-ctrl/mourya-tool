@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage Biodata Maker - Create Professional Wedding Biodata</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- html2pdf.js for PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e11d48;
+            --secondary-color: #f97316;
+            --accent-color: #fbbf24;
+        }
+        
+        body {
+            font-family: 'Noto Sans', sans-serif;
+        }
+        
+        .font-serif {
+            font-family: 'Noto Serif', serif;
+        }
+        
+        /* Custom scrollbar for template selection */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Template Styles */
+        .theme-classic {
+            background: linear-gradient(to bottom, #ffffff, #f9fafb);
+            border: 2px solid #e5e7eb;
+            font-family: 'Noto Serif', serif;
+        }
+        
+        .theme-classic .header {
+            background-color: #1e40af;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #3b82f6;
+        }
+        
+        .theme-classic .section-title {
+            color: #1e40af;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .theme-royal-gold {
+            background: linear-gradient(to bottom, #fef3c7, #ffffff);
+            border: 2px solid #fbbf24;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .theme-royal-gold::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to right, #f59e0b, #fbbf24, #f59e0b);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        .theme-royal-gold .header {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .theme-royal-gold .section-title {
+            color: #92400e;
+            border-bottom: 2px solid #f59e0b;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .theme-floral {
+            background: linear-gradient(to bottom, #fef2f2, #ffffff);
+            border: 2px solid #f87171;
+            position: relative;
+        }
+        
+        .theme-floral::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(135deg, #f87171, #fca5a5);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        .theme-floral .header {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .theme-floral .section-title {
+            color: #be123c;
+            border-bottom: 2px solid #f87171;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .theme-minimal {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            font-family: 'Noto Sans', sans-serif;
+        }
+        
+        .theme-minimal .header {
+            background-color: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .theme-minimal .section-title {
+            color: #111827;
+            border-bottom: 1px solid #9ca3af;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .theme-islamic {
+            background: linear-gradient(to bottom, #e0f2fe, #ffffff);
+            border: 2px solid #0284c7;
+            position: relative;
+        }
+        
+        .theme-islamic::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        .theme-islamic .header {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .theme-islamic .section-title {
+            color: #075985;
+            border-bottom: 2px solid #0284c7;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        /* Religious symbols */
+        .hindu-symbol {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+        
+        .muslim-symbol {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+        
+        /* Photo upload styles */
+        .photo-upload-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #e5e7eb;
+            background-color: #f9fafb;
+        }
+        
+        .photo-upload-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .photo-upload-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+        
+        .photo-upload-container:hover .photo-upload-overlay {
+            opacity: 1;
+        }
+        
+        /* Preview container */
+        .preview-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            min-height: 800px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Watermark style */
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 10px;
+            color: #9ca3af;
+            opacity: 0.7;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: var(--primary-color);
+            animation: spin 1s ease infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Tab navigation */
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .tab-nav button {
+            flex: 1;
+            padding: 12px 0;
+            background: none;
+            border: none;
+            font-weight: 500;
+            color: #6b7280;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .tab-nav button.active {
+            color: var(--primary-color);
+        }
+        
+        .tab-nav button.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        /* Form input styles */
+        .form-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.1);
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .preview-container {
+                min-height: 600px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Landing Page -->
+    <div id="landingPage" class="min-h-screen flex flex-col justify-center items-center p-6 bg-gradient-to-br from-pink-50 to-orange-50">
+        <div class="text-center max-w-md">
+            <div class="mb-8">
+                <i class="fas fa-heart text-6xl text-pink-500 mb-4"></i>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Marriage Biodata Maker</h1>
+                <p class="text-gray-600">Create professional wedding biodatas in minutes</p>
+            </div>
+            
+            <button id="createBiodataBtn" class="bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                <i class="fas fa-plus-circle mr-2"></i> Create Biodata
+            </button>
+            
+            <div class="mt-12 text-sm text-gray-500">
+                <p>Trusted by thousands of families</p>
+                <div class="flex justify-center mt-2">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Religion Selection Modal -->
+    <div id="religionModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-6">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 transform transition-all">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Select Religion</h2>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <button class="religion-option bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border-2 border-orange-200 hover:border-orange-400 transition-all" data-religion="hindu">
+                    <i class="fas fa-om text-4xl text-orange-500 mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Hindu</h3>
+                </button>
+                
+                <button class="religion-option bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-200 hover:border-blue-400 transition-all" data-religion="muslim">
+                    <i class="fas fa-moon text-4xl text-blue-500 mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Muslim</h3>
+                </button>
+            </div>
+            
+            <button id="closeReligionModal" class="mt-6 w-full py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                Cancel
+            </button>
+        </div>
+    </div>
+    
+    <!-- Template Selection -->
+    <div id="templateSelection" class="hidden min-h-screen bg-gray-50 p-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-6">
+                <button id="backToLanding" class="text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i> Back
+                </button>
+                <h2 class="text-2xl font-bold text-gray-800 mt-2">Choose a Template</h2>
+            </div>
+            
+            <div class="overflow-x-auto custom-scrollbar pb-4">
+                <div id="templateContainer" class="flex space-x-4" style="width: max-content;">
+                    <!-- Templates will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Biodata Creator -->
+    <div id="biodataCreator" class="hidden min-h-screen bg-gray-50">
+        <!-- Tab Navigation -->
+        <div class="bg-white shadow-sm sticky top-0 z-40">
+            <div class="max-w-6xl mx-auto px-4 py-2">
+                <div class="flex items-center justify-between">
+                    <button id="backToTemplates" class="text-gray-600 hover:text-gray-800">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    
+                    <div class="tab-nav flex-1 max-w-md mx-4">
+                        <button id="formTab" class="active">
+                            <i class="fas fa-edit mr-2"></i> Form
+                        </button>
+                        <button id="previewTab">
+                            <i class="fas fa-eye mr-2"></i> Preview
+                        </button>
+                    </div>
+                    
+                    <button id="changeTemplate" class="text-gray-600 hover:text-gray-800">
+                        <i class="fas fa-palette mr-2"></i> Change
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto p-4">
+            <!-- Form Section -->
+            <div id="formSection" class="bg-white rounded-lg shadow-md p-6">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-gray-800">Personal Information</h2>
+                </div>
+                
+                <!-- Photo Upload -->
+                <div class="mb-6 text-center">
+                    <div class="photo-upload-container mx-auto">
+                        <img id="photoPreview" src="https://picsum.photos/seed/person/150/150.jpg" alt="Profile Photo">
+                        <div class="photo-upload-overlay">
+                            <label for="photoUpload" class="text-white cursor-pointer">
+                                <i class="fas fa-camera text-2xl"></i>
+                            </label>
+                            <input type="file" id="photoUpload" accept="image/*" class="hidden">
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2">Click to upload photo</p>
+                </div>
+                
+                <!-- Common Fields -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="form-label">Full Name</label>
+                        <input type="text" id="fullName" class="form-input" placeholder="Enter full name">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Age</label>
+                        <input type="number" id="age" class="form-input" placeholder="Enter age">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Height</label>
+                        <input type="text" id="height" class="form-input" placeholder="e.g., 5'6&quot;">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Complexion</label>
+                        <select id="complexion" class="form-input">
+                            <option value="">Select complexion</option>
+                            <option value="Fair">Fair</option>
+                            <option value="Wheatish">Wheatish</option>
+                            <option value="Dusky">Dusky</option>
+                            <option value="Dark">Dark</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Education</label>
+                        <input type="text" id="education" class="form-input" placeholder="e.g., B.Tech, MBA">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Occupation</label>
+                        <input type="text" id="occupation" class="form-input" placeholder="e.g., Software Engineer">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Annual Income</label>
+                        <input type="text" id="income" class="form-input" placeholder="e.g., 10 LPA">
+                    </div>
+                    
+                    <div>
+                        <label class="form-label">Location</label>
+                        <input type="text" id="location" class="form-input" placeholder="City, State">
+                    </div>
+                </div>
+                
+                <!-- Religion Specific Fields -->
+                <div id="hinduFields" class="hidden mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Hindu Specific Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="form-label">Gotra</label>
+                            <input type="text" id="gotra" class="form-input" placeholder="Enter gotra">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Rashi</label>
+                            <select id="rashi" class="form-input">
+                                <option value="">Select rashi</option>
+                                <option value="Aries">Aries (Mesh)</option>
+                                <option value="Taurus">Taurus (Vrishabh)</option>
+                                <option value="Gemini">Gemini (Mithun)</option>
+                                <option value="Cancer">Cancer (Kark)</option>
+                                <option value="Leo">Leo (Singh)</option>
+                                <option value="Virgo">Virgo (Kanya)</option>
+                                <option value="Libra">Libra (Tula)</option>
+                                <option value="Scorpio">Scorpio (Vrishchik)</option>
+                                <option value="Sagittarius">Sagittarius (Dhanu)</option>
+                                <option value="Capricorn">Capricorn (Makar)</option>
+                                <option value="Aquarius">Aquarius (Kumbh)</option>
+                                <option value="Pisces">Pisces (Meen)</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Manglik Status</label>
+                            <select id="manglik" class="form-input">
+                                <option value="">Select status</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                                <option value="Partial">Partial</option>
+                                <option value="Anshik">Anshik</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="muslimFields" class="hidden mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Muslim Specific Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="form-label">Maslak</label>
+                            <input type="text" id="maslak" class="form-input" placeholder="Enter maslak">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Caste/Biradari</label>
+                            <input type="text" id="caste" class="form-input" placeholder="Enter caste/biradari">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Sect</label>
+                            <select id="sect" class="form-input">
+                                <option value="">Select sect</option>
+                                <option value="Sunni">Sunni</option>
+                                <option value="Shia">Shia</option>
+                                <option value="Ahle Hadees">Ahle Hadees</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Family Details -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Family Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="form-label">Father's Name</label>
+                            <input type="text" id="fatherName" class="form-input" placeholder="Enter father's name">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Father's Occupation</label>
+                            <input type="text" id="fatherOccupation" class="form-input" placeholder="Enter father's occupation">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Mother's Name</label>
+                            <input type="text" id="motherName" class="form-input" placeholder="Enter mother's name">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Mother's Occupation</label>
+                            <input type="text" id="motherOccupation" class="form-input" placeholder="Enter mother's occupation">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Number of Siblings</label>
+                            <input type="number" id="siblings" class="form-input" placeholder="Enter number of siblings">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Family Type</label>
+                            <select id="familyType" class="form-input">
+                                <option value="">Select family type</option>
+                                <option value="Joint Family">Joint Family</option>
+                                <option value="Nuclear Family">Nuclear Family</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Details -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Contact Details</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" class="form-input" placeholder="Enter phone number">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-input" placeholder="Enter email address">
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label class="form-label">Address</label>
+                            <textarea id="address" class="form-input" rows="3" placeholder="Enter full address"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- About Section -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">About</h3>
+                    <textarea id="about" class="form-input" rows="4" placeholder="Write a brief description about yourself, your interests, hobbies, and what you're looking for in a partner..."></textarea>
+                </div>
+                
+                <!-- Partner Preferences -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-4">Partner Preferences</h3>
+                    <textarea id="preferences" class="form-input" rows="4" placeholder="Describe your ideal partner..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Preview Section -->
+            <div id="previewSection" class="hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="preview-container" id="biodataPreview">
+                        <!-- Preview content will be dynamically generated here -->
+                    </div>
+                    
+                    <!-- Download Options -->
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                        <button id="downloadBasic" class="bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-700 transition-colors">
+                            <i class="fas fa-download mr-2"></i> Download PDF (Basic)
+                        </button>
+                        
+                        <button id="downloadPremium" class="bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold py-3 px-6 rounded-lg hover:shadow-lg transition-all">
+                            <i class="fas fa-crown mr-2"></i> Download HD (No Watermark)
+                        </button>
+                    </div>
+                    
+                    <div class="mt-4 text-center text-sm text-gray-500">
+                        <p>Basic download includes a watermark. Premium download is watermark-free.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 flex flex-col items-center">
+            <div class="spinner mb-4"></div>
+            <p class="text-gray-700">Generating PDF...</p>
+        </div>
+    </div>
+    
+    <script>
+        // App State
+        const appState = {
+            religion: '',
+            selectedTemplate: '',
+            formData: {
+                photo: 'https://picsum.photos/seed/person/150/150.jpg',
+                fullName: '',
+                age: '',
+                height: '',
+                complexion: '',
+                education: '',
+                occupation: '',
+                income: '',
+                location: '',
+                gotra: '',
+                rashi: '',
+                manglik: '',
+                maslak: '',
+                caste: '',
+                sect: '',
+                fatherName: '',
+                fatherOccupation: '',
+                motherName: '',
+                motherOccupation: '',
+                siblings: '',
+                familyType: '',
+                phone: '',
+                email: '',
+                address: '',
+                about: '',
+                preferences: ''
+            }
+        };
+        
+        // DOM Elements
+        const landingPage = document.getElementById('landingPage');
+        const religionModal = document.getElementById('religionModal');
+        const templateSelection = document.getElementById('templateSelection');
+        const biodataCreator = document.getElementById('biodataCreator');
+        const formSection = document.getElementById('formSection');
+        const previewSection = document.getElementById('previewSection');
+        const formTab = document.getElementById('formTab');
+        const previewTab = document.getElementById('previewTab');
+        const hinduFields = document.getElementById('hinduFields');
+        const muslimFields = document.getElementById('muslimFields');
+        const templateContainer = document.getElementById('templateContainer');
+        const biodataPreview = document.getElementById('biodataPreview');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        
+        // Event Listeners
+        document.getElementById('createBiodataBtn').addEventListener('click', () => {
+            religionModal.classList.remove('hidden');
+        });
+        
+        document.getElementById('closeReligionModal').addEventListener('click', () => {
+            religionModal.classList.add('hidden');
+        });
+        
+        document.getElementById('backToLanding').addEventListener('click', () => {
+            templateSelection.classList.add('hidden');
+            landingPage.classList.remove('hidden');
+        });
+        
+        document.getElementById('backToTemplates').addEventListener('click', () => {
+            biodataCreator.classList.add('hidden');
+            templateSelection.classList.remove('hidden');
+        });
+        
+        document.getElementById('changeTemplate').addEventListener('click', () => {
+            biodataCreator.classList.add('hidden');
+            templateSelection.classList.remove('hidden');
+        });
+        
+        formTab.addEventListener('click', () => {
+            formTab.classList.add('active');
+            previewTab.classList.remove('active');
+            formSection.classList.remove('hidden');
+            previewSection.classList.add('hidden');
+        });
+        
+        previewTab.addEventListener('click', () => {
+            formTab.classList.remove('active');
+            previewTab.classList.add('active');
+            formSection.classList.add('hidden');
+            previewSection.classList.remove('hidden');
+            updatePreview();
+        });
+        
+        // Religion Selection
+        document.querySelectorAll('.religion-option').forEach(button => {
+            button.addEventListener('click', () => {
+                appState.religion = button.dataset.religion;
+                religionModal.classList.add('hidden');
+                landingPage.classList.add('hidden');
+                templateSelection.classList.remove('hidden');
+                loadTemplates();
+            });
+        });
+        
+        // Load Templates Based on Religion
+        function loadTemplates() {
+            templateContainer.innerHTML = '';
+            
+            const templates = appState.religion === 'hindu' 
+                ? [
+                    { id: 'classic', name: 'Classic', class: 'theme-classic', icon: 'fa-file-alt' },
+                    { id: 'royal-gold', name: 'Royal Gold', class: 'theme-royal-gold', icon: 'fa-crown' },
+                    { id: 'floral', name: 'Floral', class: 'theme-floral', icon: 'fa-spa' },
+                    { id: 'minimal', name: 'Minimal', class: 'theme-minimal', icon: 'fa-minus' }
+                ]
+                : [
+                    { id: 'islamic', name: 'Islamic', class: 'theme-islamic', icon: 'fa-moon' },
+                    { id: 'classic', name: 'Classic', class: 'theme-classic', icon: 'fa-file-alt' },
+                    { id: 'minimal', name: 'Minimal', class: 'theme-minimal', icon: 'fa-minus' },
+                    { id: 'royal-gold', name: 'Royal Gold', class: 'theme-royal-gold', icon: 'fa-crown' }
+                ];
+            
+            templates.forEach(template => {
+                const templateCard = document.createElement('div');
+                templateCard.className = 'bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-300';
+                templateCard.style.width = '280px';
+                
+                templateCard.innerHTML = `
+                    <div class="${template.class} h-64 relative">
+                        <div class="header">
+                            <h3 class="text-xl font-bold">${template.name}</h3>
+                            <div class="mt-2">
+                                ${appState.religion === 'hindu' 
+                                    ? '<svg class="hindu-symbol" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/></svg>'
+                                    : '<svg class="muslim-symbol" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/></svg>'
+                                }
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="w-12 h-12 bg-gray-300 rounded-full mr-3"></div>
+                                <div>
+                                    <div class="h-3 bg-gray-300 rounded w-24 mb-1"></div>
+                                    <div class="h-2 bg-gray-200 rounded w-16"></div>
+                                </div>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded w-full mb-1"></div>
+                            <div class="h-2 bg-gray-200 rounded w-full mb-1"></div>
+                            <div class="h-2 bg-gray-200 rounded w-3/4"></div>
+                        </div>
+                    </div>
+                `;
+                
+                templateCard.addEventListener('click', () => {
+                    appState.selectedTemplate = template.class;
+                    templateSelection.classList.add('hidden');
+                    biodataCreator.classList.remove('hidden');
+                    
+                    // Show/hide religion-specific fields
+                    if (appState.religion === 'hindu') {
+                        hinduFields.classList.remove('hidden');
+                        muslimFields.classList.add('hidden');
+                    } else {
+                        hinduFields.classList.add('hidden');
+                        muslimFields.classList.remove('hidden');
+                    }
+                });
+                
+                templateContainer.appendChild(templateCard);
+            });
+        }
+        
+        // Photo Upload
+        document.getElementById('photoUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    appState.formData.photo = event.target.result;
+                    document.getElementById('photoPreview').src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Form Input Listeners
+        document.querySelectorAll('.form-input, textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                appState.formData[this.id] = this.value;
+            });
+        });
+        
+        // Update Preview
+        function updatePreview() {
+            const template = appState.selectedTemplate || 'theme-classic';
+            
+            let religionSpecificDetails = '';
+            
+            if (appState.religion === 'hindu') {
+                religionSpecificDetails = `
+                    <div class="mb-4">
+                        <h4 class="section-title">Religious Details</h4>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div><strong>Gotra:</strong> ${appState.formData.gotra || 'N/A'}</div>
+                            <div><strong>Rashi:</strong> ${appState.formData.rashi || 'N/A'}</div>
+                            <div><strong>Manglik:</strong> ${appState.formData.manglik || 'N/A'}</div>
+                        </div>
+                    </div>
+                `;
+            } else if (appState.religion === 'muslim') {
+                religionSpecificDetails = `
+                    <div class="mb-4">
+                        <h4 class="section-title">Religious Details</h4>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div><strong>Maslak:</strong> ${appState.formData.maslak || 'N/A'}</div>
+                            <div><strong>Caste/Biradari:</strong> ${appState.formData.caste || 'N/A'}</div>
+                            <div><strong>Sect:</strong> ${appState.formData.sect || 'N/A'}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            biodataPreview.innerHTML = `
+                <div class="${template} p-6 relative">
+                    <div class="header">
+                        <h2 class="text-2xl font-bold">Marriage Biodata</h2>
+                        <div class="mt-2">
+                            ${appState.religion === 'hindu' 
+                                ? '<svg class="hindu-symbol" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/></svg>'
+                                : '<svg class="muslim-symbol" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/></svg>'
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex flex-col items-center mb-6">
+                            <img src="${appState.formData.photo}" alt="Profile Photo" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg mb-3">
+                            <h3 class="text-xl font-bold">${appState.formData.fullName || 'Your Name'}</h3>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="section-title">Personal Details</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <div><strong>Age:</strong> ${appState.formData.age || 'N/A'}</div>
+                                <div><strong>Height:</strong> ${appState.formData.height || 'N/A'}</div>
+                                <div><strong>Complexion:</strong> ${appState.formData.complexion || 'N/A'}</div>
+                                <div><strong>Location:</strong> ${appState.formData.location || 'N/A'}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="section-title">Education & Occupation</h4>
+                            <div class="text-sm">
+                                <div><strong>Education:</strong> ${appState.formData.education || 'N/A'}</div>
+                                <div><strong>Occupation:</strong> ${appState.formData.occupation || 'N/A'}</div>
+                                <div><strong>Annual Income:</strong> ${appState.formData.income || 'N/A'}</div>
+                            </div>
+                        </div>
+                        
+                        ${religionSpecificDetails}
+                        
+                        <div class="mb-4">
+                            <h4 class="section-title">Family Details</h4>
+                            <div class="text-sm">
+                                <div><strong>Father's Name:</strong> ${appState.formData.fatherName || 'N/A'}</div>
+                                <div><strong>Father's Occupation:</strong> ${appState.formData.fatherOccupation || 'N/A'}</div>
+                                <div><strong>Mother's Name:</strong> ${appState.formData.motherName || 'N/A'}</div>
+                                <div><strong>Mother's Occupation:</strong> ${appState.formData.motherOccupation || 'N/A'}</div>
+                                <div><strong>Number of Siblings:</strong> ${appState.formData.siblings || 'N/A'}</div>
+                                <div><strong>Family Type:</strong> ${appState.formData.familyType || 'N/A'}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="section-title">Contact Details</h4>
+                            <div class="text-sm">
+                                <div><strong>Phone:</strong> ${appState.formData.phone || 'N/A'}</div>
+                                <div><strong>Email:</strong> ${appState.formData.email || 'N/A'}</div>
+                                <div><strong>Address:</strong> ${appState.formData.address || 'N/A'}</div>
+                            </div>
+                        </div>
+                        
+                        ${appState.formData.about ? `
+                        <div class="mb-4">
+                            <h4 class="section-title">About</h4>
+                            <p class="text-sm">${appState.formData.about}</p>
+                        </div>
+                        ` : ''}
+                        
+                        ${appState.formData.preferences ? `
+                        <div class="mb-4">
+                            <h4 class="section-title">Partner Preferences</h4>
+                            <p class="text-sm">${appState.formData.preferences}</p>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="watermark">Created by SarkariTool</div>
+                </div>
+            `;
+        }
+        
+        // Download PDF Functions
+        document.getElementById('downloadBasic').addEventListener('click', () => {
+            generatePDF(true);
+        });
+        
+        document.getElementById('downloadPremium').addEventListener('click', () => {
+            // Open monetization link in new tab
+            const monetagUrl = "https://otieu.com/4/10386925"; // Replace with your actual monetization URL
+            window.open(monetagUrl, '_blank');
+            
+            // Generate clean PDF without watermark
+            generatePDF(false);
+        });
+        
+        function generatePDF(withWatermark) {
+            loadingOverlay.classList.remove('hidden');
+            
+            // Update preview to match watermark preference
+            if (!withWatermark) {
+                // Remove watermark for premium download
+                const watermarkElement = biodataPreview.querySelector('.watermark');
+                if (watermarkElement) {
+                    watermarkElement.style.display = 'none';
+                }
+            } else {
+                // Ensure watermark is visible for basic download
+                const watermarkElement = biodataPreview.querySelector('.watermark');
+                if (watermarkElement) {
+                    watermarkElement.style.display = 'block';
+                }
+            }
+            
+            // Configure PDF options
+            const opt = {
+                margin: 0,
+                filename: `${appState.formData.fullName || 'biodata'}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Generate PDF
+            html2pdf().set(opt).from(biodataPreview).save().then(() => {
+                loadingOverlay.classList.add('hidden');
+                
+                // Restore watermark visibility
+                const watermarkElement = biodataPreview.querySelector('.watermark');
+                if (watermarkElement) {
+                    watermarkElement.style.display = 'block';
+                }
+            });
+        }
+        
+        // Initialize app
+        function init() {
+            // Set default values for demo
+            appState.formData.fullName = 'Rahul Sharma';
+            appState.formData.age = '28';
+            appState.formData.height = "5'8\"";
+            appState.formData.complexion = 'Wheatish';
+            appState.formData.education = 'B.Tech in Computer Science';
+            appState.formData.occupation = 'Software Engineer';
+            appState.formData.income = '15 LPA';
+            appState.formData.location = 'Mumbai, Maharashtra';
+            appState.formData.gotra = 'Kashyap';
+            appState.formData.rashi = 'Leo';
+            appState.formData.manglik = 'No';
+            appState.formData.fatherName = 'Ramesh Sharma';
+            appState.formData.fatherOccupation = 'Businessman';
+            appState.formData.motherName = 'Sunita Sharma';
+            appState.formData.motherOccupation = 'Homemaker';
+            appState.formData.siblings = '1 Sister';
+            appState.formData.familyType = 'Joint Family';
+            appState.formData.phone = '+91 9876543210';
+            appState.formData.email = 'rahul.sharma@example.com';
+            appState.formData.address = '123, ABC Road, Andheri West, Mumbai - 400053';
+            appState.formData.about = 'I am a simple, down-to-earth person with strong family values. I enjoy reading, traveling, and exploring new cuisines. I believe in maintaining a healthy work-life balance and am looking for a partner who shares similar values.';
+            appState.formData.preferences = 'Looking for a well-educated, family-oriented girl with good moral values. She should be understanding, supportive, and have a positive outlook towards life.';
+            
+            // Populate form with demo data
+            Object.keys(appState.formData).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = appState.formData[key];
+                }
+            });
+        }
+        
+        // Run initialization
+        init();
+    </script>
+</body>
+</html>
