@@ -1,196 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MouryaTools - Free Online Tools for Students & Professionals</title>
-    <meta name="description" content="MouryaTools provides free online utilities like Image Resizer, Marriage Biodata Maker, Passport Photo Generator. Simple, Fast & Secure.">
+    <title>MouryaTools - Premium Online Tools Hub</title>
+    <meta name="description" content="MouryaTools: Free suite of online tools for students. Image Resizer, Biodata Maker, Passport Photo Generator. Fast, Secure, and Dark Mode.">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (Dark Mode Ready) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDK (Version 9+ via CDN) -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-      import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-
-      // --- 🔴 REPLACE THIS WITH YOUR FIREBASE CONFIG 🔴 ---
-      const firebaseConfig = {
-  apiKey: "AIzaSyAFshh-gdh7G2K9wp3TuAwkprmfNb_nAhE",
-  authDomain: "mourya-tool.firebaseapp.com",
-  projectId: "mourya-tool",
-  storageBucket: "mourya-tool.firebasestorage.app",
-  messagingSenderId: "392072052666",
-  appId: "1:392072052666:web:d8cc30cc644dd50e11e783"
-};
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider();
-
-      // Login Logic
-      window.loginWithGoogle = () => {
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            const user = result.user;
-            updateUI(user);
-          }).catch((error) => {
-            console.error(error);
-          });
-      };
-
-      // Logout Logic
-      window.logoutUser = () => {
-        signOut(auth).then(() => {
-          updateUI(null);
-        });
-      };
-
-      // Check User State
-      onAuthStateChanged(auth, (user) => {
-        updateUI(user);
-      });
-
-      function updateUI(user) {
-        const loginBtn = document.getElementById('loginBtn');
-        const userArea = document.getElementById('userArea');
-        const userName = document.getElementById('userName');
-        const userImg = document.getElementById('userImg');
-
-        if (user) {
-          loginBtn.classList.add('hidden');
-          userArea.classList.remove('hidden');
-          userName.innerText = user.displayName.split(' ')[0]; // Show First Name
-          userImg.src = user.photoURL;
-        } else {
-          loginBtn.classList.remove('hidden');
-          userArea.classList.add('hidden');
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#3b82f6', // Blue
+                            600: '#2563eb',
+                            900: '#0f172a', // Dark BG
+                            800: '#1e293b', // Card BG
+                        }
+                    }
+                }
+            }
         }
-      }
     </script>
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
-        .gradient-text { background: linear-gradient(to right, #2563eb, #9333ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body { font-family: 'Outfit', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        /* Modal Animation */
+        .modal { transition: opacity 0.3s ease; }
+        .hidden { display: none; }
     </style>
 </head>
-<body class="text-slate-800 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
 
     <!-- NAVBAR -->
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <nav class="border-b border-gray-800 bg-brand-900 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <!-- Logo -->
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">M</div>
-                <span class="font-bold text-xl tracking-tight">Mourya<span class="text-blue-600">Tools</span></span>
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">M</div>
+                <span class="font-bold text-2xl tracking-tight text-white group-hover:text-blue-400 transition-colors">Mourya<span class="text-blue-500">Tools</span></span>
             </a>
 
-            <!-- Login / User Profile -->
+            <!-- Auth Buttons -->
             <div>
-                <button id="loginBtn" onclick="loginWithGoogle()" class="text-sm font-semibold bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-slate-700 transition-colors">
-                    Login / Sign Up
+                <button id="loginBtn" onclick="openAuthModal()" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-500/30">
+                    Login / Join
                 </button>
 
-                <!-- Hidden User Area -->
-                <div id="userArea" class="hidden flex items-center gap-3">
-                    <img id="userImg" src="" class="w-8 h-8 rounded-full border border-slate-300">
-                    <span id="userName" class="text-sm font-bold text-slate-700 hidden sm:block">User</span>
-                    <button onclick="logoutUser()" class="text-xs text-red-500 font-medium hover:underline">Logout</button>
+                <!-- Logged In User View -->
+                <div id="userProfile" class="hidden flex items-center gap-3 bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">
+                    <img id="userAvatar" src="https://ui-avatars.com/api/?name=User&background=random" class="w-7 h-7 rounded-full">
+                    <span id="userName" class="text-sm font-medium text-gray-200 hidden sm:block">User</span>
+                    <button onclick="handleLogout()" class="text-xs text-red-400 hover:text-red-300 ml-2"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <header class="bg-white py-16 sm:py-24 text-center px-4">
-        <h1 class="text-4xl sm:text-5xl font-bold mb-4">Every tool you need, <span class="gradient-text">in one place.</span></h1>
-        <p class="text-slate-500 text-lg max-w-2xl mx-auto mb-8">We make simple, secure, and free online tools to make your life easier. No software download required.</p>
+    <header class="py-20 text-center px-4 relative overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[100px] -z-10"></div>
+        
+        <h1 class="text-4xl sm:text-6xl font-bold mb-6 text-white">
+            Smart Tools for <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Smart Indians.</span>
+        </h1>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
+            Free, Secure, and Fast online utilities. Resize photos for Sarkari Exams, create Marriage Biodata, and more. No login required for basic tools.
+        </p>
     </header>
 
-    <!-- TOOLS GRID (Main Section) -->
-    <main class="flex-grow bg-slate-50 py-12 px-4">
+    <!-- TOOLS GRID (AUTOMATICALLY GENERATED) -->
+    <main class="flex-grow px-4 pb-20">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold text-slate-800 mb-8 flex items-center gap-2">
-                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                Most Popular Tools
-            </h2>
+            <div class="flex items-center gap-2 mb-8">
+                <i class="fas fa-th-large text-blue-500 text-xl"></i>
+                <h2 class="text-2xl font-bold text-white">Our Tools</h2>
+            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <!-- CARD 1: Sarkari Photo Tool -->
-                <a href="sarkari-tool.html" class="tool-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all group">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">Sarkari Photo Resizer</h3>
-                    <p class="text-sm text-slate-500">Resize photos to 20kb-50kb for SSC, UPSC, and Railway forms automatically.</p>
-                </a>
-
-                <!-- CARD 2: Marriage Biodata -->
-                <a href="marriage-biodata.html" class="tool-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all group">
-                    <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-lg flex items-center justify-center mb-4 group-hover:bg-pink-600 group-hover:text-white transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    </div>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">Marriage Biodata Maker</h3>
-                    <p class="text-sm text-slate-500">Create beautiful wedding biodata PDF with 10+ premium templates for free.</p>
-                </a>
-
-                <!-- CARD 3: Passport Photo -->
-                <a href="passport-photo.html" class="tool-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm transition-all group">
-                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
-                    </div>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">Passport Size Maker</h3>
-                    <p class="text-sm text-slate-500">Create printable passport size photos (A4 sheet) from any selfie instantly.</p>
-                </a>
-
-                <!-- Future Tool Placeholder -->
-                <div class="bg-slate-100 p-6 rounded-xl border border-dashed border-slate-300 flex flex-col items-center justify-center text-center opacity-70">
-                    <span class="text-xs font-bold text-slate-400 uppercase mb-2">Coming Soon</span>
-                    <h3 class="font-bold text-slate-600">Hindi Typing Tool</h3>
-                    <p class="text-xs text-slate-400 mt-1">Convert Hinglish to Kruti Dev</p>
-                </div>
-
+            <!-- ID Jahan Tools Inject Honge -->
+            <div id="toolsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript will load tools here -->
             </div>
         </div>
-
-        <!-- ABOUT COMPANY SECTION -->
-        <section id="about" class="max-w-4xl mx-auto mt-20 text-center">
-            <h2 class="text-2xl font-bold text-slate-800 mb-6">About MouryaTools</h2>
-            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-left">
-                <p class="text-slate-600 mb-4">
-                    Welcome to <strong>MouryaTools</strong>, a digital initiative dedicated to simplifying daily online tasks for Indians.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                    <div>
-                        <h4 class="font-bold text-slate-800 mb-2">🚀 Fast & Free</h4>
-                        <p class="text-sm text-slate-500">All our tools are 100% free to use and load instantly on mobile networks.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 mb-2">🔒 Privacy First</h4>
-                        <p class="text-sm text-slate-500">We use client-side processing. Your photos never leave your device.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 mb-2">🇮🇳 Made in India</h4>
-                        <p class="text-sm text-slate-500">Built with ❤️ for Bharat to help students and families.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
-        <p>&copy; 2026 MouryaTools. All rights reserved.</p>
-        <div class="flex justify-center gap-4 mt-2">
-            <a href="#" class="hover:text-white">Privacy Policy</a>
-            <a href="#" class="hover:text-white">Terms of Use</a>
-            <a href="#" class="hover:text-white">Contact</a>
+    <!-- LOGIN MODAL -->
+    <div id="authModal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 w-full max-w-md rounded-2xl border border-gray-700 shadow-2xl overflow-hidden relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            
+            <div class="p-8">
+                <h2 class="text-2xl font-bold text-white mb-1 text-center">Welcome Back</h2>
+                <p class="text-gray-400 text-center text-sm mb-6">Login to save your preferences</p>
+
+                <!-- Google Button -->
+                <button onclick="handleGoogleLogin()" class="w-full bg-white text-gray-900 font-bold py-3 rounded-xl flex items-center justify-center gap-3 hover:bg-gray-100 transition-colors mb-4">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5">
+                    Continue with Google
+                </button>
+
+                <div class="flex items-center gap-2 my-4 text-gray-500 text-xs uppercase">
+                    <span class="h-px bg-gray-700 flex-grow"></span> OR <span class="h-px bg-gray-700 flex-grow"></span>
+                </div>
+
+                <!-- Email Form -->
+                <form id="emailForm" onsubmit="handleEmailAuth(event)" class="space-y-4">
+                    <input type="email" id="email" placeholder="Email Address" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-3 rounded-xl focus:border-blue-500 focus:outline-none" required>
+                    <input type="password" id="password" placeholder="Password" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-3 rounded-xl focus:border-blue-500 focus:outline-none" required>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-colors">
+                        Sign In / Sign Up
+                    </button>
+                    <p class="text-xs text-gray-500 text-center">We will create an account if one doesn't exist.</p>
+                </form>
+                <p id="authError" class="text-red-400 text-xs text-center mt-3 hidden"></p>
+            </div>
         </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 border-t border-gray-800 text-gray-500 py-8 text-center text-sm">
+        <p>&copy; 2026 MouryaTools. Made with ❤️ in India.</p>
     </footer>
 
+    <!-- JAVASCRIPT & FIREBASE LOGIC -->
+    <script type="module">
+        // --- 1. FIREBASE SETUP ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFshh-gdh7G2K9wp3TuAwkprmfNb_nAhE",
+            authDomain: "mourya-tool.firebaseapp.com",
+            projectId: "mourya-tool",
+            storageBucket: "mourya-tool.firebasestorage.app",
+            messagingSenderId: "392072052666",
+            appId: "1:392072052666:web:d8cc30cc644dd50e11e783"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // --- 2. EASY TOOL ADDER SYSTEM (YAHAN NAYE TOOL ADD KARNA) ---
+        // Bas is list me ek naya object {} add kar dena
+        const toolsData = [
+            {
+                name: "Sarkari Photo Resizer",
+                desc: "Resize photo/sign for SSC, UPSC, Railway (20kb-50kb).",
+                link: "sarkari-tool.html",
+                icon: "fa-id-card", // FontAwesome Icon name
+                color: "text-blue-400",
+                bg: "bg-blue-500/10"
+            },
+            {
+                name: "Marriage Biodata Maker",
+                desc: "Create beautiful wedding biodata PDF with premium templates.",
+                link: "marriage-biodata.html",
+                icon: "fa-heart",
+                color: "text-pink-400",
+                bg: "bg-pink-500/10"
+            },
+            {
+                name: "Passport Photo Maker",
+                desc: "Convert selfie to Passport Size (2x2 inch) for Visa/PAN.",
+                link: "passport-photo.html",
+                icon: "fa-camera",
+                color: "text-green-400",
+                bg: "bg-green-500/10"
+            }
+            // Future Tool Example:
+            // { name: "New Tool", desc: "...", link: "new.html", icon: "fa-star", color: "text-yellow-400", bg: "bg-yellow-500/10" }
+        ];
+
+        // Function to render tools automatically
+        function renderTools() {
+            const container = document.getElementById('toolsContainer');
+            container.innerHTML = toolsData.map(tool => `
+                <a href="${tool.link}" class="tool-card glass-card p-6 rounded-2xl transition-all group border border-gray-700 hover:border-${tool.color.split('-')[1]}">
+                    <div class="w-12 h-12 ${tool.bg} ${tool.color} rounded-xl flex items-center justify-center mb-4 text-xl">
+                        <i class="fas ${tool.icon}"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-2 group-hover:${tool.color} transition-colors">${tool.name}</h3>
+                    <p class="text-sm text-gray-400">${tool.desc}</p>
+                </a>
+            `).join('');
+
+            // Add "Coming Soon" card
+            container.innerHTML += `
+                <div class="border border-dashed border-gray-700 p-6 rounded-2xl flex flex-col items-center justify-center text-center opacity-50">
+                    <span class="text-xs font-bold text-gray-500 uppercase mb-2">Development</span>
+                    <h3 class="font-bold text-gray-400">Hindi Typing Tool</h3>
+                    <p class="text-xs text-gray-600 mt-1">Coming Soon...</p>
+                </div>
+            `;
+        }
+        renderTools(); // Run on load
+
+        // --- 3. AUTH LOGIC ---
+        
+        // Google Login
+        window.handleGoogleLogin = () => {
+            signInWithPopup(auth, provider)
+                .then(() => closeAuthModal())
+                .catch((error) => showError(error.message));
+        };
+
+        // Email Login/Signup (Smart Logic: Tries Login, if fails, tries Signup)
+        window.handleEmailAuth = (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorText = document.getElementById('authError');
+
+            // Try Login first
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => closeAuthModal())
+                .catch((error) => {
+                    if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+                        // User nahi mila, matlab naya banana hai
+                        createUserWithEmailAndPassword(auth, email, password)
+                            .then(() => closeAuthModal())
+                            .catch((err) => showError(err.message));
+                    } else {
+                        showError(error.message);
+                    }
+                });
+        };
+
+        window.handleLogout = () => signOut(auth);
+
+        // UI Updates based on Auth State
+        onAuthStateChanged(auth, (user) => {
+            const loginBtn = document.getElementById('loginBtn');
+            const userProfile = document.getElementById('userProfile');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+
+            if (user) {
+                loginBtn.classList.add('hidden');
+                userProfile.classList.remove('hidden');
+                // Use email prefix if display name is null (Email login case)
+                userName.innerText = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
+                if(user.photoURL) userAvatar.src = user.photoURL;
+            } else {
+                loginBtn.classList.remove('hidden');
+                userProfile.classList.add('hidden');
+            }
+        });
+
+        // Helper Functions for Modal
+        function showError(msg) {
+            const el = document.getElementById('authError');
+            el.innerText = msg.replace('Firebase:', '').trim();
+            el.classList.remove('hidden');
+        }
+
+        window.openAuthModal = () => {
+            document.getElementById('authModal').classList.remove('hidden');
+            document.getElementById('authError').classList.add('hidden');
+        }
+        window.closeAuthModal = () => document.getElementById('authModal').classList.add('hidden');
+
+        // Close modal on outside click
+        document.getElementById('authModal').addEventListener('click', (e) => {
+            if (e.target.id === 'authModal') closeAuthModal();
+        });
+    </script>
 </body>
 </html>
