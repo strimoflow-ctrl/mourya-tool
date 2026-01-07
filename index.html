@@ -139,12 +139,12 @@
         <p>&copy; 2026 MouryaTools. Made with ❤️ in India.</p>
     </footer>
 
-    <!-- JAVASCRIPT & FIREBASE LOGIC -->
-    <script type="module">
+<script type="module">
         // --- 1. FIREBASE SETUP ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
+        // TUMHARA CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyAFshh-gdh7G2K9wp3TuAwkprmfNb_nAhE",
             authDomain: "mourya-tool.firebaseapp.com",
@@ -158,14 +158,13 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // --- 2. EASY TOOL ADDER SYSTEM (YAHAN NAYE TOOL ADD KARNA) ---
-        // Bas is list me ek naya object {} add kar dena
+        // --- 2. TOOLS DATA ---
         const toolsData = [
             {
                 name: "Sarkari Photo Resizer",
                 desc: "Resize photo/sign for SSC, UPSC, Railway (20kb-50kb).",
                 link: "sarkari-tool.html",
-                icon: "fa-id-card", // FontAwesome Icon name
+                icon: "fa-id-card",
                 color: "text-blue-400",
                 bg: "bg-blue-500/10"
             },
@@ -185,11 +184,8 @@
                 color: "text-green-400",
                 bg: "bg-green-500/10"
             }
-            // Future Tool Example:
-            // { name: "New Tool", desc: "...", link: "new.html", icon: "fa-star", color: "text-yellow-400", bg: "bg-yellow-500/10" }
         ];
 
-        // Function to render tools automatically
         function renderTools() {
             const container = document.getElementById('toolsContainer');
             container.innerHTML = toolsData.map(tool => `
@@ -202,7 +198,6 @@
                 </a>
             `).join('');
 
-            // Add "Coming Soon" card
             container.innerHTML += `
                 <div class="border border-dashed border-gray-700 p-6 rounded-2xl flex flex-col items-center justify-center text-center opacity-50">
                     <span class="text-xs font-bold text-gray-500 uppercase mb-2">Development</span>
@@ -211,9 +206,9 @@
                 </div>
             `;
         }
-        renderTools(); // Run on load
+        renderTools();
 
-        // --- 3. AUTH LOGIC ---
+        // --- 3. NEW & FIXED AUTH LOGIC ---
         
         // Google Login
         window.handleGoogleLogin = () => {
@@ -222,23 +217,33 @@
                 .catch((error) => showError(error.message));
         };
 
-        // Email Login/Signup (Smart Logic: Tries Login, if fails, tries Signup)
+        // FIXED EMAIL LOGIC (Reverse Strategy)
         window.handleEmailAuth = (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const errorText = document.getElementById('authError');
 
-            // Try Login first
-            signInWithEmailAndPassword(auth, email, password)
-                .then(() => closeAuthModal())
+            // Strategy: Pehle Naya Account banane ki koshish karo
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Success: Account ban gaya aur login bhi ho gaya
+                    closeAuthModal();
+                })
                 .catch((error) => {
-                    if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
-                        // User nahi mila, matlab naya banana hai
-                        createUserWithEmailAndPassword(auth, email, password)
-                            .then(() => closeAuthModal())
-                            .catch((err) => showError(err.message));
+                    // Agar error aaya ki "Account pehle se hai" (email-already-in-use)
+                    if (error.code === 'auth/email-already-in-use') {
+                        // Toh ab Login karne ki koshish karo
+                        signInWithEmailAndPassword(auth, email, password)
+                            .then(() => {
+                                closeAuthModal();
+                            })
+                            .catch((loginError) => {
+                                // Agar ab bhi error aaya, matlab Password Galat hai
+                                showError("Incorrect Password or Account issue.");
+                            });
                     } else {
+                        // Koi aur error (jaise password too short)
                         showError(error.message);
                     }
                 });
@@ -246,7 +251,7 @@
 
         window.handleLogout = () => signOut(auth);
 
-        // UI Updates based on Auth State
+        // UI Updates
         onAuthStateChanged(auth, (user) => {
             const loginBtn = document.getElementById('loginBtn');
             const userProfile = document.getElementById('userProfile');
@@ -256,7 +261,6 @@
             if (user) {
                 loginBtn.classList.add('hidden');
                 userProfile.classList.remove('hidden');
-                // Use email prefix if display name is null (Email login case)
                 userName.innerText = user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0];
                 if(user.photoURL) userAvatar.src = user.photoURL;
             } else {
@@ -265,10 +269,11 @@
             }
         });
 
-        // Helper Functions for Modal
         function showError(msg) {
             const el = document.getElementById('authError');
-            el.innerText = msg.replace('Firebase:', '').trim();
+            // Clean up error message for user
+            let cleanMsg = msg.replace('Firebase:', '').replace('auth/', '').replace(/-/g, ' ');
+            el.innerText = cleanMsg;
             el.classList.remove('hidden');
         }
 
@@ -278,7 +283,6 @@
         }
         window.closeAuthModal = () => document.getElementById('authModal').classList.add('hidden');
 
-        // Close modal on outside click
         document.getElementById('authModal').addEventListener('click', (e) => {
             if (e.target.id === 'authModal') closeAuthModal();
         });
