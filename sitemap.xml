@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <!-- Home Page -->
    <url>
-      <loc>https://mouryatools.netlify.app/</loc>
+      <loc>https://mourya-tool.netlify.app/</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>1.00</priority>
    </url>
    
-   <!-- SSC Page -->
+   <!-- Sarkari Tool Page -->
    <url>
-      <loc>https://mouryatools.netlify.app/sarkari-tool.html</loc>
+      <loc>https://mourya-tool.netlify.app/sarkari-tool.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
-   <!-- SSC Resizer (Agar alag file hai to) -->
+   <!-- SSC Page -->
    <url>
-      <loc>https://mouryatools.netlify.app/ssc-resizer.html</loc>
+      <loc>https://mourya-tool.netlify.app/ssc-resizer.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- UPSC Page -->
    <url>
-      <loc>https://mouryatools.netlify.app/upsc-resizer.html</loc>
+      <loc>https://mourya-tool.netlify.app/upsc-resizer.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- Railway Page -->
    <url>
-      <loc>https://mouryatools.netlify.app/railway-resizer.html</loc>
+      <loc>https://mourya-tool.netlify.app/railway-resizer.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- Passport Page -->
    <url>
-      <loc>https://mouryatools.netlify.app/passport-photo.html</loc>
+      <loc>https://mourya-tool.netlify.app/passport-photo.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
 
    <!-- Marriage Biodata Tool -->
    <url>
-      <loc>https://mouryatools.netlify.app/marriage-biodata.html</loc>
+      <loc>https://mourya-tool.netlify.app/marriage-biodata.html</loc>
       <lastmod>2026-01-05</lastmod>
       <priority>0.80</priority>
    </url>
